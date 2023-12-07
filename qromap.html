@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapa de Denuncias</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #mapid { height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="mapid"></div>
+    <script>
+        var mymap = L.map('mapid').setView([20.588269, -100.387889], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(mymap);
+
+        function onMapClick(e) {
+            var popup = L.popup()
+            .setLatLng(e.latlng)
+            .setContent('<p><strong>Denuncia:</strong><br><textarea id="denuncia" rows="4" cols="50"></textarea><br><button onclick="guardarDenuncia()">Guardar</button></p>')
+            .openOn(mymap);
+        }
+
+        function guardarDenuncia() {
+            // Aquí puedes agregar el código para guardar la denuncia en tu base de datos
+            alert('Denuncia guardada');
+        }
+
+        mymap.on('click', onMapClick);
+    </script>
+</body>
+</html>
